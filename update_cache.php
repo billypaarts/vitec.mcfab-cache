@@ -9,8 +9,8 @@
  */
 
 // ===== CONFIGURATION =====
-$VITEC_API_BASE = 'https://minasidor.malmocityfastigheter.se';
-$API_KEY = 'B1097B1062DFE5CA148A83E48D207386';
+$VITEC_API_BASE = 'https://arena03.vitec.net/malmocityfastigheter/manager/api/v1';
+$API_KEY = '0912D9AE887F02EE51A447C9F5E9F357';
 $CACHE_DIR = __DIR__;
 
 header('Content-Type: text/plain; charset=utf-8');
@@ -46,8 +46,8 @@ echo "\n=== KLART ===\n";
 function updateCache($api_base, $api_key, $group_id, $type) {
     global $CACHE_DIR;
     
-    // Step 1: Authenticate - RÄTT ENDPOINT enligt Vitec
-    $auth_url = $api_base . '/api/v1/authentication';
+    // Step 1: Authenticate - Rätt endpoint är "authenticate" INTE "authentication"
+    $auth_url = $api_base . 'authenticate';
     
     $ch = curl_init($auth_url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -80,7 +80,7 @@ function updateCache($api_base, $api_key, $group_id, $type) {
     }
     
     // Step 2: Fetch objects
-    $objects_url = $api_base . '/api/v1/coreexternal/publishedobjects/' . intval($group_id);
+    $objects_url = $api_base . 'coreexternal/publishedobjects/' . intval($group_id);
     
     $ch = curl_init($objects_url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
